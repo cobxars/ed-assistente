@@ -3,107 +3,437 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ed — Política de Privacidade</title>
+<title>Ed — Assistente de IA Offline para Windows</title>
+<meta name="description" content="O Ed é um assistente de IA que roda no seu PC com Windows. Depois de instalado, funciona sem internet e suas conversas não saem da máquina. Pagamento único, sem mensalidade.">
+<link rel="canonical" href="https://cobxars.github.io/ed-assistente/">
+<link rel="icon" type="image/png" href="imagens/ed_icone.png">
+<link rel="apple-touch-icon" href="imagens/ed_icone.png">
+<meta name="theme-color" content="#f6f8fc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0f1c" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Ed — Assistente de IA Offline">
+<meta property="og:title" content="Ed — Assistente de IA Offline para Windows">
+<meta property="og:description" content="IA no seu PC. Sem nuvem e sem mensalidade. Depois de instalado, funciona sem internet.">
+<meta property="og:url" content="https://cobxars.github.io/ed-assistente/">
+<meta property="og:image" content="https://cobxars.github.io/ed-assistente/imagens/ed_compartilhar.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Mascote do Ed ao lado do texto: Ed, Assistente de IA Offline. IA no seu PC. Sem nuvem e sem mensalidade.">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Página do Ed — idealizado e criado por Edgar Da Silva. Sem cookies, sem rastreadores, sem nada carregado de fora. -->
 <style>
-  :root { --fundo:#ffffff; --texto:#1b2230; --suave:#5a6478; --linha:#e3e7ef; --destaque:#2f6fdb; }
-  @media (prefers-color-scheme: dark) { :root { --fundo:#0f1320; --texto:#e7ebf5; --suave:#9aa4bd; --linha:#262d40; --destaque:#7aa7ff; } }
-  body { margin:0; background:var(--fundo); color:var(--texto); font:16px/1.65 "Segoe UI", system-ui, sans-serif; }
-  main { max-width:760px; margin:0 auto; padding:40px 16px 64px; }
-  h1 { font-size:1.9rem; margin:0 0 4px; } h2 { font-size:1.15rem; margin:32px 0 8px; color:var(--destaque); }
-  .sub { color:var(--suave); margin:0 0 24px; } hr { border:0; border-top:1px solid var(--linha); margin:48px 0; }
-  li { margin:4px 0; } code { font-size:.92em; } a { color:var(--destaque); }
+:root{
+  --fundo:#f6f8fc; --fundo-alt:#edf1f8; --papel:#ffffff; --tinta:#121826; --suave:#515d76; --linha:#dde4f0;
+  --azul:#2457d6; --azul-fundo:#e6eeff; --botao-a:#2563eb; --botao-b:#0369a1;
+  --demo-tinta:#8a4b00; --demo-fundo:#ffefd2; --brilho:rgba(37,99,235,.16); --sombra:0 18px 50px rgba(18,24,38,.14);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --fundo:#0a0f1c; --fundo-alt:#0d1424; --papel:#121b2f; --tinta:#eef2fb; --suave:#a5b3cd; --linha:#223052;
+    --azul:#7aa7ff; --azul-fundo:#15233f; --demo-tinta:#ffc861; --demo-fundo:#3a2a0c;
+    --brilho:rgba(91,149,255,.22); --sombra:0 18px 60px rgba(0,0,0,.5);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--fundo);color:var(--tinta);font:17px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif}
+img{display:block;max-width:100%;height:auto}
+a{color:var(--azul)}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--azul);outline-offset:3px;border-radius:6px}
+h1,h2,h3{line-height:1.15}
+.largura{max-width:1120px;margin:0 auto;padding:0 24px}
+.pular{position:absolute;left:-9999px;top:8px}
+.pular:focus{left:16px;z-index:20;background:var(--papel);color:var(--tinta);padding:8px 12px;border-radius:8px}
+
+/* topo */
+.topo{position:sticky;top:0;z-index:10;background:var(--fundo);background:color-mix(in srgb,var(--fundo) 86%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--linha)}
+.topo-linha{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.marca{display:flex;align-items:center;gap:10px;color:var(--tinta);text-decoration:none;font-weight:800;font-size:21px}
+.marca img{border-radius:10px}
+.menu{display:flex;align-items:center;gap:22px}
+.menu a{color:var(--suave);text-decoration:none;font-size:15px;font-weight:600}
+.menu a:hover{color:var(--tinta)}
+
+/* botões */
+.botao{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,var(--botao-a),var(--botao-b));color:#fff;text-decoration:none;font-weight:700;font-size:17px;padding:14px 24px;border-radius:12px;box-shadow:0 10px 28px var(--brilho)}
+.menu a.botao{color:#fff}
+.botao:hover{filter:brightness(1.08)}
+.botao:focus-visible{outline:3px solid var(--azul);outline-offset:3px}
+.botao svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.botao-pequeno{padding:8px 16px;font-size:15px;border-radius:10px;box-shadow:none}
+
+/* abertura */
+.heroi{position:relative;overflow:hidden;padding:72px 0 32px;text-align:center}
+.heroi::before{content:"";position:absolute;left:50%;top:-180px;width:1100px;height:760px;transform:translateX(-50%);background:radial-gradient(closest-side,var(--brilho),transparent);pointer-events:none}
+.heroi .largura{position:relative}
+.selo{display:inline-block;margin:0 0 18px;padding:6px 14px;border-radius:999px;background:var(--azul-fundo);color:var(--azul);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+h1{font-size:clamp(34px,6vw,60px);margin:0 0 18px;letter-spacing:-.02em}
+.lead{max-width:720px;margin:0 auto 30px;color:var(--suave);font-size:clamp(17px,2.2vw,20px)}
+.acoes{display:flex;flex-wrap:wrap;gap:14px 24px;justify-content:center;align-items:center}
+.link-secundario{font-weight:700;text-decoration:none;padding:8px 4px}
+.nota{margin:18px 0 0;color:var(--suave);font-size:15px}
+.tela{margin:48px auto 0;max-width:1000px}
+.tela img,.galeria img{width:100%;border-radius:14px;border:1px solid var(--linha);box-shadow:var(--sombra)}
+
+/* faixa de resumo */
+.faixa{padding:32px 0 8px}
+.faixa-grade{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.faixa-grade div{background:var(--papel);border:1px solid var(--linha);border-radius:14px;padding:16px 18px}
+.faixa-grade b{display:block;font-size:16px;margin-bottom:4px}
+.faixa-grade span{display:block;color:var(--suave);font-size:15px;line-height:1.5}
+
+/* seções */
+section{padding:72px 0}
+.alt{background:var(--fundo-alt)}
+h2{font-size:clamp(27px,3.6vw,38px);margin:0 0 10px;letter-spacing:-.01em}
+.secao-sub{color:var(--suave);margin:0 0 28px;font-size:18px;max-width:720px}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.cartao{background:var(--papel);border:1px solid var(--linha);border-radius:16px;padding:20px}
+.cartao h3{font-size:18px;margin:14px 0 6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cartao p{margin:0;color:var(--suave);font-size:16px}
+.icone{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:var(--azul-fundo);color:var(--azul)}
+.icone svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.demo{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--demo-tinta);background:var(--demo-fundo);padding:2px 9px;border-radius:999px}
+.opcional{font-size:12px;font-weight:700;color:var(--suave);border:1px solid var(--linha);padding:1px 9px;border-radius:999px}
+.controle{margin-top:20px;background:var(--azul-fundo);border-radius:16px;padding:20px 22px}
+.controle h3{margin:0 0 6px;font-size:18px}
+.controle p{margin:0}
+kbd{font-family:Consolas,ui-monospace,monospace;font-size:.9em;background:var(--papel);color:var(--tinta);border:1px solid var(--linha);border-bottom-width:2px;border-radius:6px;padding:1px 6px}
+
+.galeria{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:28px}
+.galeria figure{margin:0}
+figcaption{margin-top:12px;color:var(--suave);font-size:15px}
+
+.duas-colunas{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.tabela{background:var(--papel);border:1px solid var(--linha);border-radius:14px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:16px}
+caption{caption-side:bottom;text-align:left;padding:10px 16px 12px;color:var(--suave);font-size:14px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--linha);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+th{color:var(--suave);font-weight:600;font-size:14px}
+td.forte{font-weight:800;color:var(--azul)}
+.pequeno{font-size:14px;color:var(--suave)}
+
+.requisitos{margin:24px 0 36px;background:var(--papel);border:1px solid var(--linha);border-radius:16px;overflow:hidden}
+.requisitos div{display:grid;grid-template-columns:170px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--linha)}
+.requisitos div:last-child{border-bottom:0}
+.requisitos dt{font-weight:700}
+.requisitos dd{margin:0;color:var(--suave)}
+h3.titulo-tabela{font-size:20px;margin:0 0 12px}
+
+.cartao-preco{max-width:640px;margin:0 auto;text-align:center;background:var(--papel);border:1px solid var(--linha);border-radius:20px;padding:40px 28px;box-shadow:var(--sombra)}
+.valor{font-size:clamp(46px,8vw,66px);font-weight:800;margin:6px 0 0;letter-spacing:-.02em;line-height:1.1}
+.valor-sub{margin:4px 0 0;color:var(--suave)}
+.checks{list-style:none;padding:0;margin:22px auto 28px;max-width:470px;text-align:left}
+.checks li{position:relative;padding-left:30px;margin:10px 0}
+.checks li::before{content:"";position:absolute;left:6px;top:.32em;width:6px;height:12px;border:solid var(--azul);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.cartao-preco .checks{color:var(--suave)}
+
+.perguntas{max-width:820px}
+details{background:var(--papel);border:1px solid var(--linha);border-radius:14px;margin:10px 0;padding:0 20px}
+summary{cursor:pointer;font-weight:700;padding:16px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--azul);font-weight:800;font-size:24px;line-height:1;flex:none}
+details[open] summary::after{content:"−"}
+details p{margin:0 0 16px;color:var(--suave)}
+
+.privacidade-lista{max-width:820px}
+.privacidade-lista li{color:var(--tinta)}
+
+footer{border-top:1px solid var(--linha);padding:32px 0 48px;color:var(--suave);font-size:15px}
+footer p{margin:6px 0}
+
+@media (max-width:900px){
+  .faixa-grade{grid-template-columns:repeat(2,1fr)}
+  .duas-colunas{grid-template-columns:1fr;gap:24px}
+}
+@media (max-width:760px){
+  .so-largo{display:none}
+  .menu{gap:16px}
+  .galeria{grid-template-columns:1fr}
+  section{padding:56px 0}
+}
+@media (max-width:600px){
+  .largura{padding:0 16px}
+  .heroi{padding-top:48px}
+  .faixa-grade{grid-template-columns:1fr}
+  .requisitos div{grid-template-columns:1fr;gap:2px}
+  th,td{padding:10px 12px;font-size:15px;white-space:normal}
+  .botao{width:100%}
+  .menu a.botao{width:auto}
+}
 </style>
 </head>
 <body>
-<main>
-<h1>Ed — Política de Privacidade</h1>
-<p class="sub">Última atualização: 30 de outubro de 2026 · <a href="#en">English version below</a></p>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-<p>O <b>Ed</b> é um assistente de inteligência artificial idealizado e criado por <b>Edgar Da Silva</b>
-(MEI, CNPJ 58.024.179/0001-05), contato: <a href="mailto:edgargta3@gmail.com"><b>edgargta3@gmail.com</b></a>. Esta política explica, de forma simples, o que acontece
-com os seus dados. Ela segue a Lei Geral de Proteção de Dados (Lei 13.709/2018).</p>
+<header class="topo">
+  <div class="largura topo-linha">
+    <a class="marca" href="#inicio">
+      <img src="imagens/ed_icone.png" alt="" width="36" height="36">
+      <span>Ed</span>
+    </a>
+    <nav class="menu" aria-label="Menu">
+      <a class="so-largo" href="#recursos">Recursos</a>
+      <a class="so-largo" href="#requisitos">Requisitos</a>
+      <a class="so-largo" href="#duvidas">Dúvidas</a>
+      <a href="privacidade.html">Privacidade</a>
+      <a class="botao botao-pequeno" href="https://apps.microsoft.com/detail/9MXFD16L66QJ">Baixar</a>
+    </nav>
+  </div>
+</header>
 
-<h2>1. O Ed funciona no seu computador</h2>
-<p>Conversas, mensagens de voz, arquivos, o índice de nomes de arquivos, preferências, notas e a chave de
-ativação ficam <b>somente no seu computador</b>, na pasta <code>%LOCALAPPDATA%\EdAssistente</code>.
-A IA roda localmente pelo Ollama, no endereço <code>127.0.0.1</code> do próprio PC.
-<b>O autor não recebe nenhum desses dados.</b> Não há conta, telemetria, anúncios nem rastreamento.</p>
+<main id="conteudo">
 
-<h2>2. Quando o Ed usa a internet</h2>
-<p>Só quando você clica para:</p>
-<ul>
-  <li><b>Instalar o Ollama</b> — o instalador oficial vem de <code>ollama.com</code>;</li>
-  <li><b>Baixar o modelo de IA</b> — feito pelo próprio Ollama;</li>
-  <li><b>Baixar a enciclopédia offline</b> — vem de <code>download.kiwix.org</code>;</li>
-  <li><b>Procurar atualização</b> — consulta a página de versões do autor no GitHub.</li>
-</ul>
-
-dados técnicos de qualquer download (como o endereço IP) e seguem as próprias políticas de privacidade.</p>
-
-<h2>3. Microfone, tela e controle do PC</h2>
-<p>O microfone só é usado quando você grava uma mensagem ou inicia uma ligação; o áudio é transcrito no
-próprio computador. O compartilhamento de tela e o controle do PC começam <b>desligados</b> em cada sessão,
-só funcionam com a sua permissão e podem ser interrompidos a qualquer momento (tecla F8). Nenhuma imagem da
-tela é gravada em arquivo.</p>
-
-<h2>4. O que o Ed nunca lê</h2>
-<p>Senhas, PINs, números de cartão, contas bancárias, documentos (CPF, RG, passaporte), histórico ou dados
-salvos do navegador e o conteúdo dos seus arquivos — o índice guarda só nomes e caminhos.</p>
-
-<h2>5. Dados da compra</h2>
-<p>Se você comprou pela Microsoft Store, a compra é feita pela Microsoft, na sua conta Microsoft — o autor não recebe seus dados de pagamento. Se comprou por outra
-plataforma (como Kiwify ou Hotmart), por ela. O autor usa o seu e-mail apenas para entregar a chave de
-ativação, dar suporte e cumprir obrigações legais.</p>
-
-<h2>6. Pedidos de ajuda (suporte)</h2>
-<p>Para apagar os dados locais, desinstale o Ed e exclua a pasta <code>%LOCALAPPDATA%\EdAssistente</code>.
-Para dados da compra (acesso, correção ou exclusão), escreva para <a href="mailto:edgargta3@gmail.com">edgargta3@gmail.com</a>.</p>
-
-<h2>8. Crianças</h2>
-<p>O Ed não é direcionado a menores de 13 anos e não coleta dados de ninguém.</p>
-
-<h2>9. Mudanças</h2>
-<p>Se esta política mudar, a data no topo será atualizada nesta mesma página.</p>
-
-<hr>
-
-<section id="en" lang="en">
-<h1>Ed — Privacy Policy</h1>
-<p class="sub">Last updated: October 30, 2026</p>
-<p><b>Ed</b> is an AI assistant created by <b>Edgar Da Silva</b> (Brazilian company registration CNPJ 58.024.179/0001-05). Contact: <a href="mailto:edgargta3@gmail.com"><b>edgargta3@gmail.com</b></a>.</p>
-
-<h2>1. Ed runs on your computer</h2>
-<p>Chats, voice messages, files, the file-name index, preferences, notes and the activation key stay
-<b>only on your computer</b>, in <code>%LOCALAPPDATA%\EdAssistente</code>. The AI runs locally through Ollama at
-<code>127.0.0.1</code>. <b>The author receives none of this data.</b> No account, telemetry, ads or tracking.</p>
-
-<h2>2. When Ed uses the internet</h2>
-<p>Only when you click to install Ollama (official installer from <code>ollama.com</code>), download the AI
-model (through Ollama), download the offline encyclopedia (from <code>download.kiwix.org</code>) or check for
-updates (the author's GitHub releases page). No personal data or conversation is sent; those services only
-receive the technical data of any download (such as your IP address) under their own privacy policies.</p>
-
-<h2>3. Microphone, screen and PC control</h2>
-<p>The microphone is used only when you record a message or start a voice call; audio is transcribed on your
-computer. Screen sharing and PC control are <b>off</b> in every session, work only with your permission and
-can be stopped at any time (F8). No screen images are saved to files.</p>
-
-<h2>4. What Ed never reads</h2>
-<p>Passwords, PINs, card numbers, bank accounts, ID documents, browser history or saved browser data, and the
-contents of your files — the index keeps only names and paths.</p>
-
-<h2>5. Purchase data</h2>
-<p>Purchases through the Microsoft Store are made with your Microsoft account — the author never receives your payment data; purchases through other platforms are
-processed by them. The author uses your e-mail only to deliver the activation key, provide support and meet
-legal obligations.</p>
-
-<h2>6. Support requests</h2>
-<p>To delete local data, uninstall Ed and delete <code>%LOCALAPPDATA%\EdAssistente</code>. For purchase data,
-write to <a href="mailto:edgargta3@gmail.com">edgargta3@gmail.com</a>.</p>
-
-<h2>8. Children</h2>
-<p>Ed is not directed to children under 13 and does not collect data from anyone.</p>
+<section class="heroi" id="inicio">
+  <div class="largura">
+    <p class="selo">Assistente de IA para Windows</p>
+    <h1>IA no seu PC.<br>Sem nuvem e sem mensalidade.</h1>
+    <p class="lead">O Ed conversa com você, vê a tela quando você deixa, abre programas, faz limpeza segura e consulta a Wikipédia guardada no seu computador. Depois de instalado, funciona sem internet, e suas conversas não saem da máquina.</p>
+    <div class="acoes">
+      <a class="botao" href="https://apps.microsoft.com/detail/9MXFD16L66QJ">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+        Baixar na Microsoft Store
+      </a>
+      <a class="link-secundario" href="#recursos">Ver o que ele faz ↓</a>
+    </div>
+    <!-- PREÇO: se mudar o preço na loja, troque aqui e na seção "preco" -->
+    <p class="nota">R$&nbsp;29,95 · pagamento único · Windows 10 e 11 (64&nbsp;bits)</p>
+    <figure class="tela">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="imagens/conversa_escuro.jpg">
+        <img src="imagens/conversa_claro.jpg" width="1280" height="720" alt="Janela do Ed com uma conversa: a pergunta sobre quem pintou o teto da Capela Sistina e a resposta, Michelangelo, entre 1508 e 1512.">
+      </picture>
+    </figure>
+  </div>
 </section>
+
+<div class="faixa" role="region" aria-label="Em resumo">
+  <div class="largura faixa-grade">
+    <div><b>Roda no seu PC</b><span>A IA conversa com o Ollama no próprio computador.</span></div>
+    <div><b>Offline depois de instalado</b><span>Internet só para baixar o motor de IA e os modelos.</span></div>
+    <div><b>Pagamento único</b><span>Sem mensalidade, sem anúncios, sem compras no app.</span></div>
+    <div><b>Na Microsoft Store</b><span>Compra e atualizações pela sua conta Microsoft.</span></div>
+  </div>
+</div>
+
+<section id="recursos">
+  <div class="largura">
+    <h2>O que o Ed faz</h2>
+    <p class="secao-sub">Tudo roda no seu computador, e você liga só o que quiser usar.</p>
+    <div class="grade">
+      <article class="cartao">
+        <div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div>
+        <h3>Conversa de verdade</h3>
+        <p>Por texto ou mensagem de voz, em 11 idiomas. Abre no idioma do seu Windows.</p>
+      </article>
+      <article class="cartao">
+        <div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></div>
+        <h3>Ligação por voz <span class="demo">Demo</span></h3>
+        <p>Fale com o Ed e ouça a resposta, com uma voz que roda no próprio PC. Ainda é demonstração: pode errar ou demorar.</p>
+      </article>
+      <article class="cartao">
+        <div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
+        <h3>Vê a sua tela</h3>
+        <p>Ligue o compartilhamento e pergunte “o que aparece na minha tela?”. A imagem fica só na memória e não é salva.</p>
+      </article>
+      <article class="cartao">
+        <div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></div>
+        <h3>Wikipédia offline <span class="opcional">opcional</span></h3>
+        <p>A Wikipédia em português guardada no seu disco. O Ed confere nomes, datas e números antes de responder.</p>
+      </article>
+      <article class="cartao">
+        <div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M8 6h.01M11 6h.01"/></svg></div>
+        <h3>Abre programas e acha arquivos</h3>
+        <p>“Abra o Discord”, “abra a pasta Downloads”, “encontre contrato.pdf”. Também ajusta o volume, pausa a música e bloqueia o PC.</p>
+      </article>
+      <article class="cartao">
+        <div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></div>
+        <h3>Limpeza segura</h3>
+        <p>Mostra quanto dá para liberar em temporários, caches de navegador e Lixeira, e só apaga o que você marcar.</p>
+      </article>
+      <article class="cartao">
+        <div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Arquivos suspeitos</h3>
+        <p>Verificação offline com quarentena reversível: nada é apagado. Não substitui o Microsoft Defender.</p>
+      </article>
+      <article class="cartao">
+        <div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <h3>Auditoria de privacidade</h3>
+        <p>Mostra o que o Ed guarda e confere câmera, microfone e telemetria do Windows, sem mudar nada.</p>
+      </article>
+    </div>
+    <div class="controle">
+      <h3>Você no controle</h3>
+      <p>Agente, controle do PC e compartilhamento de tela começam desligados em cada sessão. Ações perigosas, como desligar, reiniciar ou encerrar programas, sempre pedem confirmação. A tecla <kbd>F8</kbd> interrompe qualquer ação na hora.</p>
+    </div>
+  </div>
+</section>
+
+<section id="por-dentro" class="alt">
+  <div class="largura">
+    <h2>Por dentro do Ed</h2>
+    <p class="secao-sub">Telas de verdade do programa.</p>
+    <div class="galeria">
+      <figure>
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="imagens/limpeza_escuro.jpg">
+          <img src="imagens/limpeza_claro.jpg" width="1280" height="720" loading="lazy" alt="Tela Limpeza segura do Ed: lista de temporários, caches e Lixeira com caixas para marcar e o botão Limpar selecionados.">
+        </picture>
+        <figcaption>Limpeza segura: você vê o que é lixo e escolhe o que apagar.</figcaption>
+      </figure>
+      <figure>
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="imagens/privacidade_escuro.jpg">
+          <img src="imagens/privacidade_claro.jpg" width="1280" height="720" loading="lazy" alt="Tela Auditoria de privacidade do Ed: conexões externas zero, o que o Ed nunca lê e os ajustes de câmera e microfone do Windows.">
+        </picture>
+        <figcaption>Auditoria de privacidade: só leitura, nada é alterado.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="wikipedia">
+  <div class="largura duas-colunas">
+    <div>
+      <h2>Mais acerto com a Wikipédia no PC</h2>
+      <p>Para perguntas de conhecimento (história, geografia, ciência…), o Ed consulta a Wikipédia em português guardada no seu disco antes de responder.</p>
+      <p>Ela é opcional: a versão completa ocupa cerca de 6,7 GB e a compacta, 1,7 GB. O download vem do site oficial do Kiwix e, depois dele, tudo funciona sem internet.</p>
+      <p class="pequeno">O Ed é uma IA local de porte pequeno: ele pode errar. Confira informações importantes.</p>
+    </div>
+    <div class="tabela">
+      <table>
+        <caption>Testes internos com 300 perguntas difíceis.</caption>
+        <thead><tr><th scope="col">Modelo</th><th scope="col">Sem a Wikipédia</th><th scope="col">Com a Wikipédia</th></tr></thead>
+        <tbody>
+          <tr><td>Básico</td><td>51%</td><td class="forte">81%</td></tr>
+          <tr><td>Recomendado</td><td>82%</td><td class="forte">~92%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="requisitos" class="alt">
+  <div class="largura">
+    <h2>Requisitos</h2>
+    <dl class="requisitos">
+      <div><dt>Sistema</dt><dd>Windows 10 (versão 1809 ou mais nova) ou Windows 11, de 64 bits</dd></div>
+      <div><dt>Memória</dt><dd>Mínimo de 8 GB de RAM. Recomendado: 16 GB</dd></div>
+      <div><dt>Espaço</dt><dd>Cerca de 10 GB livres. Opcionais: a Wikipédia (~6,7 GB a completa ou ~1,7 GB a compacta) e o modelo que lê a tela (de 1,8 a 5,8 GB, conforme o PC)</dd></div>
+      <div><dt>Internet</dt><dd>Só na primeira configuração e nos downloads que você pedir</dd></div>
+      <div><dt>Motor de IA</dt><dd>Ollama, gratuito. O Ed baixa o instalador oficial, confere a assinatura digital e instala com um clique</dd></div>
+    </dl>
+    <h3 class="titulo-tabela">O Ed escolhe o modelo pela memória do seu PC</h3>
+    <div class="tabela">
+      <table>
+        <thead><tr><th scope="col">Seu PC</th><th scope="col">Modelo</th><th scope="col">Tamanho</th></tr></thead>
+        <tbody>
+          <tr><td>8 GB de RAM</td><td>Básico (qwen2.5:1.5b)</td><td>~1 GB</td></tr>
+          <tr><td>14 GB ou mais</td><td>Recomendado (qwen2.5:7b)</td><td>~4,7 GB</td></tr>
+          <tr><td>24 GB ou mais</td><td>Avançado (qwen2.5:14b)</td><td>~9 GB</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="pequeno">As funções de assistente (abrir programas, limpeza, verificação de arquivos e controle do PC) funcionam mesmo sem a IA.</p>
+  </div>
+</section>
+
+<section id="preco">
+  <div class="largura">
+    <div class="cartao-preco">
+      <h2>Pague uma vez. Use sem mensalidade.</h2>
+      <!-- PREÇO: se mudar o preço na loja, troque aqui e no topo da página -->
+      <p class="valor">R$ 29,95</p>
+      <p class="valor-sub">pagamento único na Microsoft Store</p>
+      <ul class="checks">
+        <li>Sem mensalidade, sem anúncios e sem compras dentro do app</li>
+        <li>Compra pela sua conta Microsoft: o autor do Ed não recebe seus dados de pagamento</li>
+        <li>Atualizações pela própria Microsoft Store</li>
+      </ul>
+      <a class="botao" href="https://apps.microsoft.com/detail/9MXFD16L66QJ">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+        Baixar na Microsoft Store
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="duvidas" class="alt">
+  <div class="largura perguntas">
+    <h2>Dúvidas comuns</h2>
+    <details>
+      <summary>Precisa de internet?</summary>
+      <p>Só na primeira configuração: o Ed baixa o motor de IA (Ollama, gratuito) e o modelo de IA. Depois disso, funciona sem internet. A Wikipédia offline e o modelo que lê a tela também são baixados uma vez só, se você quiser usar.</p>
+    </details>
+    <details>
+      <summary>Vai rodar no meu PC?</summary>
+      <p>Se for Windows 10 (versão 1809 ou mais nova) ou Windows 11, de 64 bits, com pelo menos 8 GB de RAM e uns 10 GB livres, sim. O Ed olha a memória do PC e escolhe o modelo certo: com 8 GB ele usa o Básico; com 14 GB ou mais, o Recomendado.</p>
+    </details>
+    <details>
+      <summary>É assinatura?</summary>
+      <p>Não. É pagamento único na Microsoft Store, sem mensalidade, sem anúncios e sem compras dentro do app.</p>
+    </details>
+    <details>
+      <summary>Minhas conversas vão para algum lugar?</summary>
+      <p>Não. O Ed só conversa com o Ollama no próprio computador (endereço 127.0.0.1). Não há conta, telemetria nem rastreamento. Os detalhes estão na <a href="privacidade.html">política de privacidade</a>.</p>
+    </details>
+    <details>
+      <summary>Preciso instalar mais alguma coisa?</summary>
+      <p>O Ed usa o Ollama, um motor de IA gratuito. Se ele não estiver instalado, o Ed baixa o instalador oficial do site ollama.com, confere a assinatura digital e instala com um clique.</p>
+    </details>
+    <details>
+      <summary>A ligação por voz funciona?</summary>
+      <p>Funciona, mas ainda é Demo: pode errar, demorar ou não entender tudo. Se preferir, digite ou use o botão Gravar mensagem.</p>
+    </details>
+    <details>
+      <summary>O Ed é tão bom quanto as IAs online?</summary>
+      <p>Não em tudo. É uma IA local de porte pequeno: em tarefas complexas, os grandes modelos online são mais fortes. A vantagem do Ed é rodar no seu PC, funcionar sem internet, manter suas conversas na máquina e não ter mensalidade. Ele pode errar, então confira informações importantes.</p>
+    </details>
+    <details>
+      <summary>Tem teste grátis? E se não funcionar no meu PC?</summary>
+      <p>Não há período de teste na loja. Se o Ed não funcionar no seu PC, o reembolso é pedido à própria Microsoft, conforme a política da loja. Você também tem o direito de arrependimento de 7 dias do Código de Defesa do Consumidor.</p>
+    </details>
+    <details>
+      <summary>Funciona em Mac, Linux ou celular?</summary>
+      <p>Não. Por enquanto, só no Windows 10 e 11 (64 bits).</p>
+    </details>
+    <details>
+      <summary>A primeira resposta demorou. É normal?</summary>
+      <p>É. Na primeira pergunta depois de ligar o PC, o modelo de IA é carregado na memória (até uns 40 segundos em alguns computadores). As seguintes são rápidas.</p>
+    </details>
+    <details>
+      <summary>Como peço ajuda?</summary>
+      <p>Escreva para <a href="mailto:edgargta3@gmail.com">edgargta3@gmail.com</a>. Dentro do Ed, os botões Gerar diagnóstico e Exportar conversa criam dois arquivos que mostram o que aconteceu. Nada é enviado sozinho: você revisa e manda se quiser.</p>
+    </details>
+  </div>
+</section>
+
+<section id="privacidade">
+  <div class="largura">
+    <h2>Privacidade de verdade</h2>
+    <ul class="checks privacidade-lista">
+      <li>O Ed só conversa com o Ollama no próprio computador (127.0.0.1): suas perguntas não saem da máquina.</li>
+      <li>Sem conta, sem telemetria, sem anúncios e sem rastreamento.</li>
+      <li>A internet só é usada quando você clica: para instalar o Ollama ou baixar um modelo ou a enciclopédia.</li>
+      <li>O Ed nunca lê senhas, cartões, contas bancárias, documentos pessoais, o histórico do navegador nem o conteúdo dos seus arquivos.</li>
+      <li>Imagens da tela ficam só na memória e nunca são gravadas em arquivo.</li>
+    </ul>
+    <p><a href="privacidade.html"><b>Leia a política de privacidade completa</b></a></p>
+    <p class="pequeno">Esta página não usa cookies, anúncios nem rastreadores.</p>
+  </div>
+</section>
+
 </main>
+
+<footer>
+  <div class="largura">
+    <p><b>Ed</b> — idealizado e criado por Edgar Da Silva, no Brasil · PrivAI Code · CNPJ 58.024.179/0001-05</p>
+    <p>Suporte: <a href="mailto:edgargta3@gmail.com">edgargta3@gmail.com</a> · <a href="privacidade.html">Política de privacidade</a> · <a href="https://apps.microsoft.com/detail/9MXFD16L66QJ">Microsoft Store</a></p>
+    <p class="pequeno">Conteúdo da enciclopédia: Wikipédia (licença CC BY-SA), via Kiwix. Ollama é software da Ollama Inc. (licença MIT). Windows e Microsoft Store são marcas da Microsoft.</p>
+  </div>
+</footer>
 </body>
 </html>
